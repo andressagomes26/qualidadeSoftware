@@ -49,11 +49,8 @@ public class TransacaoTest {
 
 		locacao1.alugar(new Cliente("Andressa", 1, false), filme, data);
 		locacao2.alugar(new Cliente("Andressa2", 2, true), filme, data);
-		
-		
 		locacao4.alugar(new Cliente("Andressa4", 4, true), filme2, data);
 		locacao5.alugar(new Cliente("Andressa5", 5, true), filme3, data);
-		
 		locacaoFav.alugar(new Cliente("AndressaFav", 6, true), filme, data);
 		
 		transacao = new Transacao();
@@ -76,13 +73,13 @@ public class TransacaoTest {
 		assertTrue(100 == transacao.valorLocacaoTotal());
 	}
 	
-	// Registrar HORA da locação para os filmes alugado
+	// Registrar HORA da locação para os filmes alugados
 	public void registrarHoraLocacaoTest() {
 		transacao.alugueis.add(locacao1);
 		assertEquals("21:22", transacao.registrarHora());
 	}
 	
-	// Registrar DATA da locação para os filmes alugado
+	// Registrar DATA da locação para os filmes alugados
 	public void registrarDataLocacaoTest() {
 		transacao.alugueis.add(locacao1);
 		assertEquals("08/09/2022", transacao.registrarData());
@@ -125,7 +122,7 @@ public class TransacaoTest {
 	}
 	
 	
-	// Testar quais gêneros são mais alugados
+	// Testar quais são os gêneros mais alugados
 	@Test 
 	public void buscaGeneroMaisAlugadoTest() {
 	 	transacao.alugueis.add(locacao1);

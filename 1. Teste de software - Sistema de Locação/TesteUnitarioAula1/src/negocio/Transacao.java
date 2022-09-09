@@ -44,9 +44,13 @@ public class Transacao {
 		
 		for(Locacao locacao : alugueis) {
 			if(locacao.cliente.situacao) {
+				System.out.println("Cliente " + locacao.cliente.nome + " = Ativo (Pode alugar filmes).");
 				return locacao.cliente;
 			}
+			
+			System.out.println("Cliente " + locacao.cliente.nome + " = Inativo (Não pode alugar filmes).");
 		}
+		
 		return null;
 	}
 	
@@ -94,10 +98,13 @@ public class Transacao {
 			}
 		
 			if(indiceMaior == 0) {
+				System.out.println("Gênero mais alugado: " + negocio.Genero.ROMANCE);
 				return negocio.Genero.ROMANCE;
 			} else if (indiceMaior == 1) {
+				System.out.println("Gênero mais alugado:" + negocio.Genero.DRAMA);
 				return negocio.Genero.DRAMA;
 			} else if(indiceMaior == 2) {
+				System.out.println("Gênero mais alugado:" + negocio.Genero.COMEDIA);
 				return negocio.Genero.COMEDIA;
 			}
 			
@@ -105,7 +112,6 @@ public class Transacao {
 		return null;
 	}
 
-	// Permitir que o cliente possa fazer uma lista de filmes favorito
 	public String listaFilmesFavoritos(boolean favoritos) {
 	    
 		for (LocacaoFav locacao : alugueisFavoritos) {
@@ -114,7 +120,6 @@ public class Transacao {
 			}
 			
 		}
-		
 		return null;
 	}
 	
