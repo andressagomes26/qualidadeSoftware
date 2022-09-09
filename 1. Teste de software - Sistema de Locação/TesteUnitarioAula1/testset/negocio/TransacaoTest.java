@@ -19,6 +19,8 @@ public class TransacaoTest {
 	Locacao locacao2;
 	Locacao locacao4;
 	Locacao locacao5;
+	LocacaoFav locacaoFav;
+	
 	Filme filme;
 	Filme filme2;
 	Filme filme3;
@@ -30,6 +32,7 @@ public class TransacaoTest {
 		locacao2 = new Locacao();
 		locacao4 = new Locacao();
 		locacao5 = new Locacao();
+		locacaoFav = new LocacaoFav();
 		
 		transacao = new Transacao();
 		
@@ -50,6 +53,8 @@ public class TransacaoTest {
 		
 		locacao4.alugar(new Cliente("Andressa4", 4, true), filme2, data);
 		locacao5.alugar(new Cliente("Andressa5", 5, true), filme3, data);
+		
+		locacaoFav.alugar(new Cliente("AndressaFav", 6, true), filme, data);
 		
 		transacao = new Transacao();
 		
@@ -122,7 +127,7 @@ public class TransacaoTest {
 	
 	// Testar quais gêneros são mais alugados
 	@Test 
-	public void buscaGeneroMaisAlugado() {
+	public void buscaGeneroMaisAlugadoTest() {
 	 	transacao.alugueis.add(locacao1);
 	 	transacao.alugueis.add(locacao2);
 	 	transacao.alugueis.add(locacao4);
@@ -131,6 +136,13 @@ public class TransacaoTest {
 	 	assertEquals(filme.genero, transacao.buscaGeneroMaisAlugado());
 	}
 	
+	
+	// Permitir que o cliente possa fazer uma lista de filmes favorito
+	@Test
+	public void listaFilmesFavoritos() {
+		transacao.alugueisFavoritos.add(locacaoFav);
+	 	assertEquals("Java", transacao.listaFilmesFavoritos(true));
+	}
 	
 }
 

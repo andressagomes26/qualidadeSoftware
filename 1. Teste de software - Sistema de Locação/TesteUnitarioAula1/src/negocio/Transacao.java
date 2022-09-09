@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Transacao {
 	
 	protected  ArrayList<Locacao> alugueis;
-	protected  ArrayList<Locacao> alugueisFavoritos;
+	protected  ArrayList<LocacaoFav> alugueisFavoritos;
 	
 	public Transacao() {
 		
 		alugueis= new ArrayList<Locacao>();
-		alugueisFavoritos = new ArrayList<Locacao>();
+		alugueisFavoritos = new ArrayList<LocacaoFav>();
 	}
 	
 	public double valorLocacaoTotal() {
@@ -104,4 +104,18 @@ public class Transacao {
 		}
 		return null;
 	}
+
+	// Permitir que o cliente possa fazer uma lista de filmes favorito
+	public String listaFilmesFavoritos(boolean favoritos) {
+	    
+		for (LocacaoFav locacao : alugueisFavoritos) {
+			if(favoritos) {
+				return locacao.filme.nome;
+			}
+			
+		}
+		
+		return null;
+	}
+	
 }
