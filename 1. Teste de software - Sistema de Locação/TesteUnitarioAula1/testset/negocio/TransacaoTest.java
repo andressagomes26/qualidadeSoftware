@@ -144,5 +144,11 @@ public class TransacaoTest {
 	 	assertEquals("Java", transacao.listaFilmesFavoritos(true));
 	}
 	
+	@Test
+	public void listaFilmesNormais() {
+		transacao.alugueisFavoritos.add(locacaoFav);
+	 	assertEquals(null, transacao.listaFilmesFavoritos(false));
+	}
+	
 }
 
