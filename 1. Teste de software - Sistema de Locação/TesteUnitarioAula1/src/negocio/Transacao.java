@@ -1,15 +1,16 @@
 package negocio;
 
 import java.util.ArrayList;
-import negocio.Genero;
 
 public class Transacao {
 	
 	protected  ArrayList<Locacao> alugueis;
+	protected  ArrayList<Locacao> alugueisFavoritos;
 	
 	public Transacao() {
 		
 		alugueis= new ArrayList<Locacao>();
+		alugueisFavoritos = new ArrayList<Locacao>();
 	}
 	
 	public double valorLocacaoTotal() {
@@ -54,20 +55,53 @@ public class Transacao {
 		double valor=0;
 		double desconto = 0;
 		for (Locacao locacao : alugueis) {
-			if(locacao.filme.genero == Genero.ROMANCE) {
+			if(locacao.filme.genero == negocio.Genero.ROMANCE) {
 				valor += locacao.filme.valor;
 				desconto = 10;
-			} else if(locacao.filme.genero == Genero.DRAMA) {
+			} else if(locacao.filme.genero == negocio.Genero.DRAMA) {
 				valor += locacao.filme.valor;
 				desconto = 20;
 			}
-			else if(locacao.filme.genero == Genero.COMEDIA) {
+			else if(locacao.filme.genero == negocio.Genero.COMEDIA) {
 				valor += locacao.filme.valor;
 				desconto = 50;
 			}
-			
 		}
 		return valor-(valor*(desconto/100));
 	}
 	
+	
+	// Buscar quais gêneros são mais alugados
+	public Genero buscaGeneroMaisAlugado() {
+		int[] generos = new int[3];
+		
+		for(Locacao locacao : alugueis) {
+			if(locacao.filme.genero == negocio.Genero.ROMANCE) {
+				generos[0] += 1;
+			} else if(locacao.filme.genero == negocio.Genero.DRAMA) {
+				generos[1] += 1;
+			} else if(locacao.filme.genero == negocio.Genero.COMEDIA) {
+				generos[2] += 1;
+			}
+			
+			int maior = 0;
+			int indiceMaior = -1;
+			for (int i = 0; i < generos.length; i++) {
+			    if (generos[i] > maior) {
+			        maior = generos[i];
+			        indiceMaior = i;
+			    }
+			}
+		
+			if(indiceMaior == 0) {
+				return negocio.Genero.ROMANCE;
+			} else if (indiceMaior == 1) {
+				return negocio.Genero.DRAMA;
+			} else if(indiceMaior == 2) {
+				return negocio.Genero.COMEDIA;
+			}
+			
+		}
+		return null;
+	}
 }

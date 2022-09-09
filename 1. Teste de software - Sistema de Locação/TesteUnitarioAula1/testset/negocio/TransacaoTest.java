@@ -119,5 +119,18 @@ public class TransacaoTest {
 		assertEquals(50,transacao.calculoDesconto(filme3.genero),0.01);
 	}
 	
+	
+	// Testar quais gêneros são mais alugados
+	@Test 
+	public void buscaGeneroMaisAlugado() {
+	 	transacao.alugueis.add(locacao1);
+	 	transacao.alugueis.add(locacao2);
+	 	transacao.alugueis.add(locacao4);
+	 	transacao.alugueis.add(locacao5);
+	 		
+	 	assertEquals(filme.genero, transacao.buscaGeneroMaisAlugado());
+	}
+	
+	
 }
 
