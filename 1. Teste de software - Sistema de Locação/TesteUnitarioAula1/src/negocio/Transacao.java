@@ -21,6 +21,23 @@ public class Transacao {
 	}
 	
 	
+ 	public String registrarHora() {
+ 		String hora = "";
+		for(Locacao locacao : alugueis) {
+			hora = locacao.data.hora;
+		}
+		return hora;
+	}
+ 	
+	
+ 	public String registrarData() {
+ 		String data = "";
+		for(Locacao locacao : alugueis) {
+			data = locacao.data.data;
+		}
+		return data;
+	}
+ 	
 	
  	public Cliente clienteInativoAlugarFilme() {
 		

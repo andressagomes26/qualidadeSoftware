@@ -17,20 +17,39 @@ public class TransacaoTest {
 	Transacao transacao;
 	Locacao locacao1;
 	Locacao locacao2;
+	Locacao locacao4;
+	Locacao locacao5;
 	Filme filme;
+	Filme filme2;
+	Filme filme3;
+	Data data;
 	
 	@Before
 	public void setUp() throws Exception {
 		locacao1 = new Locacao();
 		locacao2 = new Locacao();
+		locacao4 = new Locacao();
+		locacao5 = new Locacao();
 		
 		transacao = new Transacao();
 		
 		filme = new Filme("Java", Genero.ROMANCE);
 		filme.valor = 100;
+		
+		filme2 = new Filme("Java", Genero.DRAMA);
+		filme2.valor = 100;
+		
+		filme3 = new Filme("Java", Genero.COMEDIA);
+		filme3.valor = 100;
+		
+		data = new Data("08/09/2022", "21:22");
 
-		locacao1.alugar(new Cliente("Andressa", 1, false), filme);
-		locacao2.alugar(new Cliente("Andressa2", 2, true), filme);
+		locacao1.alugar(new Cliente("Andressa", 1, false), filme, data);
+		locacao2.alugar(new Cliente("Andressa2", 2, true), filme, data);
+		
+		
+		locacao4.alugar(new Cliente("Andressa4", 4, true), filme2, data);
+		locacao5.alugar(new Cliente("Andressa5", 5, true), filme3, data);
 		
 		transacao = new Transacao();
 		
@@ -46,71 +65,58 @@ public class TransacaoTest {
 		Filme f = new Filme("Java", Genero.ROMANCE);
 		f.valor = 100;
 
-		locacao.alugar(new Cliente("Izaias", 2, true), f);
+		locacao.alugar(new Cliente("Izaias", 2, true), f, data);
 
 		transacao.alugueis.add(locacao);
 		assertTrue(100 == transacao.valorLocacaoTotal());
 	}
 	
+	// Registrar HORA da locação para os filmes alugado
+	public void registrarHoraLocacaoTest() {
+		transacao.alugueis.add(locacao1);
+		assertEquals("21:22", transacao.registrarHora());
+	}
+	
+	// Registrar DATA da locação para os filmes alugado
+	public void registrarDataLocacaoTest() {
+		transacao.alugueis.add(locacao1);
+		assertEquals("08/09/2022", transacao.registrarData());
+	}
+	
 
-	// Se o cliente for inativo não poderá alugar filmes.
+	// Cliente inativo = não pode alugar filmes.
 	@Test 
 	public void clienteInativoAlugarFilmeTest() {
 		transacao.alugueis.add(locacao1);
 		assertNull(transacao.clienteInativoAlugarFilme());
 	}
 	
-	// Se o cliente for ativo poderá alugar filmes.
+	// Cliente ativo = pode alugar filmes.
 	@Test 
 	public void clienteAtivoAlugarFilmeTest() {
 		transacao.alugueis.add(locacao2);
 		assertEquals("Andressa2", transacao.clienteInativoAlugarFilme().nome);
 	}
 	
-	
 	// Desconto de aluguel - Gênero Romance 
 	@Test 
 	public void calculoDescontoRomanceTest() {
-		
-		Locacao locacao = new Locacao();
-		Filme f = new Filme("Java", Genero.ROMANCE);
-		f.valor = 100;
-
-		locacao.alugar(new Cliente("Teste", 3, true), f);
-
-		transacao.alugueis.add(locacao);
-		assertEquals(90,transacao.calculoDesconto(f.genero),0.01);
-		
-	
+		transacao.alugueis.add(locacao1);
+		assertEquals(90,transacao.calculoDesconto(filme.genero),0.01);
 	}
 	
 	// Desconto de aluguel - Gênero Drama 
 	@Test 
 	public void calculoDescontoDramaTest() {
-		
-		Locacao locacao = new Locacao();
-		Filme f = new Filme("Java", Genero.DRAMA);
-		f.valor = 100;
-
-		locacao.alugar(new Cliente("Teste", 3, true), f);
-
-		transacao.alugueis.add(locacao);
-		assertEquals(80,transacao.calculoDesconto(f.genero),0.01);
-		
+		transacao.alugueis.add(locacao4);
+		assertEquals(80,transacao.calculoDesconto(filme2.genero),0.01);
 	}
 	
 	// Desconto de aluguel - Gênero Comedia 
 	@Test 
 	public void calculoDescontoComediaTest() {
-		
-		Locacao locacao = new Locacao();
-		Filme f = new Filme("Java", Genero.COMEDIA);
-		f.valor = 100;
-
-		locacao.alugar(new Cliente("Teste", 3, true), f);
-
-		transacao.alugueis.add(locacao);
-		assertEquals(50,transacao.calculoDesconto(f.genero),0.01);
+		transacao.alugueis.add(locacao5);
+		assertEquals(50,transacao.calculoDesconto(filme3.genero),0.01);
 	}
 	
 }
