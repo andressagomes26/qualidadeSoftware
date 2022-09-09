@@ -1,7 +1,5 @@
 package negocio;
 
-//import negocio.Locacao;
-//import negocio.Filme;
 
 public class Cliente {
 
@@ -9,8 +7,6 @@ public class Cliente {
 	protected int id;
 	protected boolean situacao;
 	
-	//Locacao locacao;
-	//Filme filme;
 	
 	public Cliente(String nome, int id, boolean situacao) {
 		this.nome= nome;
@@ -18,22 +14,4 @@ public class Cliente {
 		this.situacao = situacao;
 	}
 	
-	/*public boolean clienteInativoAlugarFilme() {
-		if(situacao) {
-			Locacao locacao = new Locacao();
-			Filme filme = new Filme();
-			
-			return locacao.alugar(Cliente, filme);
-			
-		}
-	}
-	
-	public void clienteInativoAlugarFilme() {
-		if(situacao) {
-			return locacao.cliente;
-		}
-			
-		}
-		return null;
-	}*/
 }

@@ -66,5 +66,52 @@ public class TransacaoTest {
 		transacao.alugueis.add(locacao2);
 		assertEquals("Andressa2", transacao.clienteInativoAlugarFilme().nome);
 	}
+	
+	
+	// Desconto de aluguel - Gênero Romance 
+	@Test 
+	public void calculoDescontoRomanceTest() {
+		
+		Locacao locacao = new Locacao();
+		Filme f = new Filme("Java", Genero.ROMANCE);
+		f.valor = 100;
+
+		locacao.alugar(new Cliente("Teste", 3, true), f);
+
+		transacao.alugueis.add(locacao);
+		assertEquals(90,transacao.calculoDesconto(f.genero),0.01);
+		
+	
+	}
+	
+	// Desconto de aluguel - Gênero Drama 
+	@Test 
+	public void calculoDescontoDramaTest() {
+		
+		Locacao locacao = new Locacao();
+		Filme f = new Filme("Java", Genero.DRAMA);
+		f.valor = 100;
+
+		locacao.alugar(new Cliente("Teste", 3, true), f);
+
+		transacao.alugueis.add(locacao);
+		assertEquals(80,transacao.calculoDesconto(f.genero),0.01);
+		
+	}
+	
+	// Desconto de aluguel - Gênero Comedia 
+	@Test 
+	public void calculoDescontoComediaTest() {
+		
+		Locacao locacao = new Locacao();
+		Filme f = new Filme("Java", Genero.COMEDIA);
+		f.valor = 100;
+
+		locacao.alugar(new Cliente("Teste", 3, true), f);
+
+		transacao.alugueis.add(locacao);
+		assertEquals(50,transacao.calculoDesconto(f.genero),0.01);
+	}
+	
 }
 

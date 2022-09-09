@@ -1,10 +1,9 @@
 package negocio;
 
 import java.util.ArrayList;
+import negocio.Genero;
 
 public class Transacao {
-
-	//Cliente cliente; 
 	
 	protected  ArrayList<Locacao> alugueis;
 	
@@ -22,20 +21,8 @@ public class Transacao {
 	}
 	
 	
-	/*public Cliente clienteInativoAlugarFilme() {
-		
-		for(Locacao locacao : alugueis) {
-			if(locacao.cliente.situacao) {
-				return locacao.cliente;
-			}
-			/*else {
-				return null;
-			}
-		}
-		return null;
-	}*/
 	
-	public Cliente clienteInativoAlugarFilme() {
+ 	public Cliente clienteInativoAlugarFilme() {
 		
 		for(Locacao locacao : alugueis) {
 			if(locacao.cliente.situacao) {
@@ -44,4 +31,26 @@ public class Transacao {
 		}
 		return null;
 	}
+	
+	
+	public double calculoDesconto(Genero Genero) {
+		double valor=0;
+		double desconto = 0;
+		for (Locacao locacao : alugueis) {
+			if(locacao.filme.genero == Genero.ROMANCE) {
+				valor += locacao.filme.valor;
+				desconto = 10;
+			} else if(locacao.filme.genero == Genero.DRAMA) {
+				valor += locacao.filme.valor;
+				desconto = 20;
+			}
+			else if(locacao.filme.genero == Genero.COMEDIA) {
+				valor += locacao.filme.valor;
+				desconto = 50;
+			}
+			
+		}
+		return valor-(valor*(desconto/100));
+	}
+	
 }
